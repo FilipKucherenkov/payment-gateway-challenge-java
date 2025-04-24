@@ -1,11 +1,14 @@
 package com.checkout.payment.gateway.model.entity;
 
+import com.checkout.payment.gateway.model.dto.PostPaymentRequest;
 import com.checkout.payment.gateway.model.enums.CurrencyCode;
 import com.checkout.payment.gateway.model.enums.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnTransformer;
@@ -16,6 +19,7 @@ import java.util.UUID;
 @Table(name = "payment")
 public class Payment {
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
   @Column(name = "order_id", nullable = false)
@@ -109,5 +113,18 @@ public class Payment {
 
   public void setOrderId(UUID orderId) {
     this.orderId = orderId;
+  }
+
+
+  public static Payment from(PostPaymentRequest paymentRequest, boolean isAuthorized){
+    Payment payment = new Payment();
+    payment.setOrderId(paymentRequest.orderId());
+    payment.setAmount(paymentRequest.amount());
+    payment.setStatus(isAuthorized ? PaymentStatus.AUTHORIZED : PaymentStatus.DECLINED);
+    payment.setCvv(paymentRequest.cvv());
+    payment.setExpiryDate(LocalDate.of(paymentRequest.expiryYear(), paymentRequest.expiryMonth(), 1));
+    payment.setCurrency(paymentRequest.currencyCode());
+    payment.setCardNumber(paymentRequest.card_number());
+    return payment;
   }
 }
