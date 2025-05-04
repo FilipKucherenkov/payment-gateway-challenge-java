@@ -5,7 +5,6 @@ import com.checkout.payment.gateway.model.dto.PostPaymentRequest;
 import com.checkout.payment.gateway.model.dto.PostPaymentResponse;
 import com.checkout.payment.gateway.service.PaymentGatewayService;
 import java.util.UUID;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

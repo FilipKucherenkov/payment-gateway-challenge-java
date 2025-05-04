@@ -4,8 +4,6 @@ import com.checkout.payment.gateway.exception.AcquiringBankException;
 import com.checkout.payment.gateway.model.dto.AcquiringBankRequest;
 import com.checkout.payment.gateway.model.dto.AcquiringBankResponse;
 import com.checkout.payment.gateway.model.dto.PostPaymentRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class AcquiringBankIntegrationService {
-  private static final Logger LOGGER = LoggerFactory.getLogger(AcquiringBankIntegrationService.class);
 
   @Value("${acquiring-bank.url}")
   private String acquiringBankUrl;

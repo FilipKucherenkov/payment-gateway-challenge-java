@@ -10,10 +10,10 @@ public record PostPaymentResponse(
     @JsonProperty("id") UUID id,
     @JsonProperty("order_id") UUID orderId,
     @JsonProperty("status") PaymentStatus paymentStatus,
-    @JsonProperty("last_four_card_digits") String lastFourCardDigits,
+    @JsonProperty("card_number_last_four") String lastFourCardDigits,
     @JsonProperty("expiry_month") int expiryMonth,
     @JsonProperty("expiry_year") int expiryYear,
-    @JsonProperty("currency") CurrencyCode currencyCode,
+    @JsonProperty("currency_code") CurrencyCode currencyCode,
     @JsonProperty("amount") long amount
     )
 {

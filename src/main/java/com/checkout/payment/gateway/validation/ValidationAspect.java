@@ -25,12 +25,12 @@ public class ValidationAspect {
 
     if (request.expiryMonth() < 1 || request.expiryMonth() > 12) {
       errors.add("Expiry month must be between 1 and 12");
-    }
-
-    YearMonth now = YearMonth.now();
-    YearMonth expiry = YearMonth.of(request.expiryYear(), request.expiryMonth());
-    if (expiry.isBefore(now)) {
-      errors.add("Card expiry date must be in the future");
+    }else{
+      YearMonth now = YearMonth.now();
+      YearMonth expiry = YearMonth.of(request.expiryYear(), request.expiryMonth());
+      if (expiry.isBefore(now)) {
+        errors.add("Card expiry date must be in the future");
+      }
     }
 
     if (Objects.isNull(request.orderId())) {
